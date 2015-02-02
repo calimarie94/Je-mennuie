@@ -23,7 +23,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/com.android.imac.je_m_ennuie/databases/";
 
-    private static String DB_NAME = "Jemennuie_database";
+    private static String DB_NAME;
 
     public ArrayList<Question> questions;
     public LinkedList<ActivityToDo> activities;
@@ -38,22 +38,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return myDataBase;
         }
 
-        public DataBaseHelper(Context context, String databaseName) {
-            super(context, databaseName, null, 1);
+        private static DataBaseHelper sInstance;
+
+        public static DataBaseHelper getInstance(Context context) {
+
+            if (sInstance == null) {
+                sInstance = new DataBaseHelper(context);
+            }
+            return sInstance;
+        }
+
+         private DataBaseHelper(Context context) {
+            super(context, JemennuieActivity.DB_NAME, null, 1);
             myContext = context;
             //Write a full path to the databases of your application
             String packageName = context.getPackageName();
             DB_PATH = String.format("//data//data//%s//databases//", packageName);
-            DB_NAME = databaseName;
+            DB_NAME = JemennuieActivity.DB_NAME;
             questions = new ArrayList<Question>();
             activities = new LinkedList<ActivityToDo>();
             openDataBase();
-        }
+         }
 
         //This piece of code will create a database if it’s not yet created
         public void createDataBase() {
-            boolean dbExist = checkDataBase();
-            if (!dbExist) {
+            //boolean dbExist = checkDataBase();
+           // if (!dbExist) {
                 this.getReadableDatabase();
                 try {
                     copyDataBase();
@@ -61,9 +71,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     Log.e(this.getClass().toString(), "Copying error");
                     throw new Error("Error copying database!");
                 }
-            } else {
-                Log.i(this.getClass().toString(), "Database already exists");
-            }
+           // } else {
+              //  Log.i(this.getClass().toString(), "Database already exists");
+           // }
         }
 
         //Performing a database existence check

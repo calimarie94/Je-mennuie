@@ -1,5 +1,10 @@
 package com.android.imac.je_m_ennuie;
 
+import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,32 +20,43 @@ public class Game {
     public static final int NB_ROUND = 2;
     public static final int NB_ACTIVITIES_TO_SHOW = 10;
 
+    private static Game sInstance;
+
     LinkedList<ActivityToDo> activityGameArray; //Les activités possibles restantes
     ArrayList<Question> questionGameArray; //Les questions qui n'ont pas encore été posées
-    DataBase dataBase; //La base de donnée avec les listes
+
     HashMap< Question, Answer > questionAnsweredMap; //Les réponses données par le joueur pour chaque question
     LinkedList<ActivityToDo> activityToShowArray; //Les activités à montrer
     int roundNumber; //Le numéro du round
     int nbQuestionAnswered; //Le nombre de question posées
     int idCurrentQuestion; //L'index de la question courante dans l'array de question
 
-    Game()
+    private final Context myContext;
+
+    public static Game getInstance(Context context) {
+
+        if (sInstance == null) {
+            sInstance = new Game(context);
+        }
+        return sInstance;
+    }
+
+    private Game(Context context)
     {
-        dataBase = new DataBase();
         activityGameArray = new LinkedList<ActivityToDo>();
         questionGameArray = new ArrayList<Question>();
         questionAnsweredMap = new HashMap<Question, Answer>();
         activityToShowArray = new LinkedList<ActivityToDo>();
 
-        //Initialisation de la base de données
-        dataBase.initialize();
         roundNumber = 0;
         idCurrentQuestion = -1;
         nbQuestionAnswered = 0;
+
+        myContext = context;
     }
 
     //Commencement d'un nouveau jeu
-    void newGame()
+    public void newGame()
     {
         //Nettoyage des différentes listes
         activityGameArray.clear();
@@ -48,8 +64,10 @@ public class Game {
         questionAnsweredMap.clear();
 
         //Recuperation de toutes les activités et questions
-        activityGameArray = (LinkedList<ActivityToDo>)dataBase.getActivityDBArray().clone();
-        questionGameArray = (ArrayList<Question>)dataBase.getQuestionDBArray().clone();
+        DataBaseHelper dataBase = DataBaseHelper.getInstance(myContext);
+
+        activityGameArray = (LinkedList<ActivityToDo>)dataBase.activities.clone();
+        questionGameArray = (ArrayList<Question>)dataBase.questions.clone();
 
         roundNumber = 0;
         nbQuestionAnswered = 0;
@@ -147,17 +165,18 @@ public class Game {
 
             //Liste des activités à supprimer
             LinkedList<ActivityToDo> activitiesToSupress = new LinkedList<ActivityToDo>();
+            DataBaseHelper dataBase = DataBaseHelper.getInstance(myContext);
 
             for(ActivityToDo activityToDo : activityGameArray )
             {
-                Answer impact = activityToDo.getImpact(dataBase, question);
+                /*Answer impact = activityToDo.getImpact(dataBase, question);
 
                 if( impact != Answer.NoMatter && impact != answer )
                 {
                     //Si l'activité doit être supprimé, on la met dans la liste des activités à supprimer
                     activitiesToSupress.push(activityToDo);
                     System.out.println("Activité " + activityToDo + " supprimée");
-                }
+                }*/
             }
 
             //On supprime ces activités de la liste d'activités possibles
@@ -195,8 +214,4 @@ public class Game {
         }
     }
 
-    public static void main(String [] args)
-    {
-
-    }
 }

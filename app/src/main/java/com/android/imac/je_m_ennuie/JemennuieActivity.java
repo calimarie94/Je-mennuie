@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import java.sql.SQLException;
 
 
 public class JemennuieActivity extends ActionBarActivity {
+
+    public static final String DB_NAME = "Jemennuie_database.sqlite3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +76,19 @@ public class JemennuieActivity extends ActionBarActivity {
             }
         });
 
+        DataBaseHelper myDbHelper = DataBaseHelper.getInstance(this);
 
+        // Création de la BDD
+        System.out.println("Debut Database");
+        myDbHelper.createDataBase();
+        System.out.println("Database created ! ");
 
-        Game game = new Game();
-        game.newGame();
+        myDbHelper.openDataBase();
+        myDbHelper.fillQuestionsFromDB();
+        myDbHelper.fillActivitiesToDoFromDB();
 
-        game.answerQuestion(Answer.Yes);
-        game.answerQuestion(Answer.NoMatter);
-        game.answerQuestion(Answer.No);
+        // Création du jeu
+        Game game = Game.getInstance(this);
 
     }
 
