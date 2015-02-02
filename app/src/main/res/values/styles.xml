@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <!-- Général -->
+    <color name="background_color">#ff73b4eb</color>
+    <color name="button_normal">#ffff9016</color>
+    <color name="button_clicked">#ffffb915</color>
+    <color name="text_color">#ffffffff</color>
+
+    <!-- Reseaux sociaux -->
+    <color name="facebook">#3b5998</color>
+    <color name="twitter">#FF49DAFF</color>
+    <color name="google">#dd4b39</color>
+
+</resources>

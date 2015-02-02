@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    android:gravity="center_vertical"
+    tools:context=".GameDisplayActivity">
+
+    <TextView
+        android:id="@+id/title_activity_detailed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_detailed_activity"
+        android:textSize="@dimen/middle_text"
+        android:textColor="@color/text_color"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/middle_margin"/>
+
+
+    <TextView
+        android:id="@+id/text_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_detailed_activity"
+        android:textSize="@dimen/default_text"
+        android:lineSpacingMultiplier="1.3"
+        android:textColor="@color/text_color"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:gravity="center_horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/big_size"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btn_facebook"
+                android:text="f"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/facebook"
+                android:layout_margin="@dimen/thin_margin"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/big_text"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/btn_twitter"
+                android:text="t"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/twitter"
+                android:layout_margin="@dimen/thin_margin"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/big_text"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/btn_gmail"
+                android:text="g"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/google"
+                android:layout_margin="@dimen/thin_margin"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/big_text"
+                android:layout_weight="1"
+                />
+
+    </LinearLayout>
+        <Button
+            android:id="@+id/btn_favorite"
+            android:text="@string/button_detailed_activity"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/middle_size"
+            android:background="@color/button_normal"
+            android:layout_margin="@dimen/thin_margin"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/default_text"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

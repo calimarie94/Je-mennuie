@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TITRES -->
+    <string name="app_name">Application Je m\'ennuie</string>
+    <string name="title_game_display">Début du jeu</string>
+
+    <!-- ACCUEIL -->
+    <string name="home_button1">Jouer</string>
+    <string name="home_button2">Mes activités</string>
+    <string name="home_button3">Quitter</string>
+    <string name="action_settings">Options</string>
+
+    <!-- QUESTIONS -->
+    <string name="answer_yes">Carrément !</string>
+    <string name="answer_maybe">Peut être...</string>
+    <string name="answer_no">Tu rêves !</string>
+
+    <!-- MES ACTIVITES -->
+    <string name="title_activity_list">Mes activités</string>
+    <string name="title_activity_detailed">Détail de l\'activité</string>
+
+    <!-- ACTIVITES DETAILLEES -->
+    <string name="title_detailed_activity">Activité</string>
+    <string name="text_detailed_activity">Lis l\'intégrale du seigneur des anneaux, pour voir les différences avec le film</string>
+    <string name="button_detailed_activity">Retirer des favoris</string>
+
+    <!-- RESULTATS -->
+    <string name="title_result">Résultat</string>
+    <string name="button_ok">Super idée !</string>
+    <string name="button_next">Trouve moi autre chose</string>
+
+    <!-- PLUS DE RESULTATS -->
+    <string name="title_nomoreresult">Désolé !</string>
+    <string name="text_nomoreresult">Tu as vu mes 5 propositions d\'activités</string>
+    <string name="button_back">Réafficher les propositions</string>
+    <string name="button_continue">Continuer les questions</string>
+    <string name="button_myactivities">Voir la liste de mes activités</string>
+
+    <!-- RESEAUX sociaux -->
+    <string name="facebook_app_id">407723899384341</string>
+
+
+
+
+</resources>

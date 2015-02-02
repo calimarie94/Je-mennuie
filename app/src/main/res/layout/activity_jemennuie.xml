@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    tools:context=".JemennuieActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_home"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        >
+
+        <Button
+            android:id="@+id/button1"
+            android:text="@string/home_button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_normal"
+            android:layout_margin="@dimen/thin_margin"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/default_text"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:text="@string/home_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_normal"
+            android:layout_margin="@dimen/thin_margin"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/default_text"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:text="@string/home_button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_normal"
+            android:layout_margin="@dimen/thin_margin"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/default_text"/>
+
+        </LinearLayout>
+
+
+</LinearLayout>
