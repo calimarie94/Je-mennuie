@@ -18,21 +18,7 @@ import android.widget.Toast;
  * Created by Marie on 23/12/2014.
  */
 public class GameDisplayActivity extends Activity implements View.OnClickListener {
-    // Liste des questions (à recuperer de la BDD)
-    final String[] questions = new String[]{
-            "Le texte un tout petit plus long de la jolie petite question 1 ?",
-            "Le texte un tout petit plus long de la jolie petite question 2 ?",
-            "Le texte un tout petit plus long de la jolie petite question 3 ?",
-            "Le texte un tout petit plus long de la jolie petite question 4 ?",
-            "Le texte un tout petit plus long de la jolie petite question 5 ?",
-            "Le texte un tout petit plus long de la jolie petite question 6 ?",
-            "Le texte un tout petit plus long de la jolie petite question 7 ?",
-            "Le texte un tout petit plus long de la jolie petite question 8 ?",
-            "Le texte un tout petit plus long de la jolie petite question 9 ?",
-            "Le texte un tout petit plus long de la jolie petite question 10 ?",
-    };
 
-    int num_question=0;
     TextView question;
     TextView number_question;
     Button button_yes;
@@ -52,11 +38,12 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
         button_maybe = (Button) findViewById(R.id.btn_maybe);
         button_no = (Button) findViewById(R.id.btn_no);
 
-        /* Update des bonnes données */
-        question.setText(questions[num_question]);
-        number_question.setText((num_question+1)+"/10");
+        // Récupération du jeu
+        final Game game = Game.getInstance(this);
 
-        num_question++;
+        /* Update des bonnes données */
+        question.setText(game.getCurrentQuestionText());
+        number_question.setText(game.idCurrentQuestion + "/10");
 
         /* On charge la bonne police */
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
@@ -73,20 +60,25 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
         button_maybe.setOnClickListener(this);
         button_no.setOnClickListener(this);
 
-        Game game = Game.getInstance(this);
+
     }
 
     @Override
     public void onClick(View v) {
+        // Récupération du jeu
+        final Game game = Game.getInstance(this);
 
         if(v==button_yes || v==button_maybe || v==button_no){
-
             // Si on est en dessous de 10 questions
-            if(num_question<10) {
-                question.setText(questions[num_question]);
-                number_question.setText((num_question + 1) + "/10");
-                num_question++;
-                // enregistrement de la reponse
+            if(game.idCurrentQuestion<game.NB_QUESTIONS_PER_ROUND) {
+                if (v==button_yes)
+                    game.answerQuestion(Answer.Yes);
+                else if (v==button_maybe)
+                    game.answerQuestion(Answer.NoMatter);
+                else if (v==button_no)
+                    game.answerQuestion(Answer.No);
+                question.setText(game.getCurrentQuestionText());
+                number_question.setText(game.idCurrentQuestion + "/10");
             }
             // Sinon on loade le résultat
             else{
