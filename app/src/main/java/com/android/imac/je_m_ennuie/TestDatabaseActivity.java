@@ -28,7 +28,7 @@ public class TestDatabaseActivity extends Activity{
         setContentView(R.layout.activity_jemennuie);
 
 
-        DataBaseHelper myDbHelper = new DataBaseHelper(this, DB_NAME);
+        DataBaseHelper myDbHelper = DataBaseHelper.getInstance(this);
 
         System.out.println("Debut Database");
         myDbHelper.createDataBase();

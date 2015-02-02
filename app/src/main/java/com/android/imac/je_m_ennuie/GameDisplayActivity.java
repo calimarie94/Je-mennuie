@@ -73,6 +73,8 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
         button_maybe.setOnClickListener(this);
         button_no.setOnClickListener(this);
 
+        Game game = Game.getInstance(this);
+        System.out.println("Numero de question" + game.idCurrentQuestion);
 
     }
 
