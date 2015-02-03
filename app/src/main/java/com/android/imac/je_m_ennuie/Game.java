@@ -28,8 +28,10 @@ public class Game {
     HashMap< Question, Answer > questionAnsweredMap; //Les réponses données par le joueur pour chaque question
     public LinkedList<ActivityToDo> activityToShowArray; //Les activités à montrer
     int roundNumber; //Le numéro du round
-    int nbQuestionAnswered; //Le nombre de question posées
+    public int nbQuestionAnswered; //Le nombre de question posées
     int idCurrentQuestion; //L'index de la question courante dans l'array de question
+
+    public boolean round_finished = false;
 
     private static Context myContext;
 
@@ -75,6 +77,7 @@ public class Game {
     public void beginRound()
     {
         askQuestion();
+        round_finished = false;
     }
 
     //Poser une question
@@ -109,6 +112,15 @@ public class Game {
         if( nbQuestionAnswered >= NB_QUESTIONS_PER_ROUND )
         {
             roundFinished();
+            round_finished = true;
+            nbQuestionAnswered = 0;
+        }
+        //S'il n'y a plus de questions à posé
+        else if(questionGameArray.isEmpty())
+        {
+            roundFinished();
+            round_finished = true;
+            nbQuestionAnswered = 0;
         }
         //Sinon, on repose une autre question
         else {
@@ -170,14 +182,14 @@ public class Game {
 
             for(ActivityToDo activityToDo : activityGameArray )
             {
-                /*Answer impact = activityToDo.getImpact(dataBase, question);
+                Answer impact = dataBase.getImpactActivity(activityToDo.getIdActivity(), question.getId() );
 
                 if( impact != Answer.NoMatter && impact != answer )
                 {
                     //Si l'activité doit être supprimé, on la met dans la liste des activités à supprimer
                     activitiesToSupress.push(activityToDo);
                     System.out.println("Activité " + activityToDo + " supprimée");
-                }*/
+                }
             }
 
             //On supprime ces activités de la liste d'activités possibles
@@ -217,7 +229,10 @@ public class Game {
 
     public String getCurrentQuestionText()
     {
-        return questionGameArray.get(idCurrentQuestion).getNameQuestion();
+        if( idCurrentQuestion != -1)
+            return questionGameArray.get(idCurrentQuestion).getNameQuestion();
+        else
+            return "";
     }
 
 }

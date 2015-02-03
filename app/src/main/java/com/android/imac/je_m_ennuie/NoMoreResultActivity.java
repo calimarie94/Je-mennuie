@@ -14,6 +14,9 @@ import android.widget.Toast;
  * Created by Marie on 26/12/2014.
  */
 public class NoMoreResultActivity extends Activity {
+
+    Game game;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,8 @@ public class NoMoreResultActivity extends Activity {
         btn_back.setBackgroundResource(R.drawable.selector);
         btn_continue.setBackgroundResource(R.drawable.selector);
 
+        game = Game.getInstance(this);
+
         /* Evenements au clic */
         btn_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -46,8 +51,12 @@ public class NoMoreResultActivity extends Activity {
 
         btn_continue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NoMoreResultActivity.this, GameDisplayActivity.class);
-                startActivity(intent);
+                if(!game.questionGameArray.isEmpty() && !game.activityGameArray.isEmpty() )
+                {
+                    game.beginRound();
+                    Intent intent = new Intent(NoMoreResultActivity.this, GameDisplayActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

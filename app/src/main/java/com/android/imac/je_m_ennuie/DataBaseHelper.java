@@ -231,21 +231,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Impact d'une activité selon une question
         Answer getImpactActivity(int idActivity, int  idQuestion)
         {
-            System.out.println("getImpactActivity");
-            //Lecture en BD
-            //Cursor cur = this.myDataBase.rawQuery("SELECT impact FROM ActivityQuestion WHERE id_activity = "+idActivity+ " AND id_question ="+ idQuestion, null);
 
-            System.out.println("idActivity " + idActivity);
-            System.out.println("idQuestion " + idQuestion);
             int zero = 0;
             Cursor cur = this.myDataBase.rawQuery("SELECT impact FROM ActivityQuestion WHERE id_activity = "+idActivity+ " AND id_question ="+ idQuestion,null);
-            System.out.println("getImpactActivity");
-            System.out.println("taille colonne cursor "+ cur.getColumnCount());
-            System.out.println("taille cursor "+ cur.getCount());
-
-
-           // System.out.println(cur.getString(0));
-
 
             if (cur.getCount() == 0){
                 return Answer.NoMatter;
@@ -254,9 +242,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
                 cur.moveToFirst();
 
-                System.out.println("getImpactActivity cur != null");
                 int impact = cur.getInt(0);
-                System.out.println("getImpactActivity impact = "+ impact);
+
                 switch (impact) {
                     case 0:
                         return Answer.No;
