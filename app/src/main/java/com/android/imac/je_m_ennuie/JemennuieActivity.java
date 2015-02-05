@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import java.sql.SQLException;
 
 
 public class JemennuieActivity extends ActionBarActivity {
+
+    public static final String DB_NAME = "Jemennuie_database.sqlite3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,24 @@ public class JemennuieActivity extends ActionBarActivity {
         button2.setBackgroundResource(R.drawable.selector);
         button3.setBackgroundResource(R.drawable.selector);
 
+        DataBaseHelper myDbHelper = DataBaseHelper.getInstance(this);
+
+        // Création de la BDD
+        System.out.println("Debut Database");
+        myDbHelper.createDataBase();
+        System.out.println("Database created ! ");
+
+        myDbHelper.openDataBase();
+        myDbHelper.fillQuestionsFromDB();
+        myDbHelper.fillActivitiesToDoFromDB();
+
+        // Création du jeu
+        final Game game = Game.getInstance(this);
+
         /* Evenements au clic */
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                game.newGame();
                 Intent intent = new Intent(JemennuieActivity.this, GameDisplayActivity.class);
                 startActivity(intent);
             }
@@ -75,13 +92,6 @@ public class JemennuieActivity extends ActionBarActivity {
         });
 
 
-
-        Game game = new Game();
-        game.newGame();
-
-        game.answerQuestion(Answer.Yes);
-        game.answerQuestion(Answer.NoMatter);
-        game.answerQuestion(Answer.No);
 
     }
 

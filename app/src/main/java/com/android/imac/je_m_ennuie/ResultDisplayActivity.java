@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.LinkedList;
+
 /**
  * Created by Marie on 27/12/2014.
  */
@@ -27,6 +29,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
     TextView result;
     Button btn_ok;
     Button btn_next;
+    Game game;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,19 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
         btn_ok = (Button) findViewById(R.id.button_ok);
         btn_next = (Button) findViewById(R.id.button_next);
 
-        /* Update des bonnes données */
-        result.setText(results[num_result]);
-        num_result++;
+        game = Game.getInstance(this);
 
+        /* Update des bonnes données */
+        if(!game.activityToShowArray.isEmpty())
+        {
+            result.setText(game.activityToShowArray.get(num_result).getNameActivity());
+            num_result++;
+        }
+        else
+        {
+            Intent intent = new Intent(this, NoMoreResultActivity.class);
+            startActivity(intent);
+        }
         /* On charge la bonne police */
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title_result.setTypeface(font);
@@ -67,8 +79,8 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
         }
         if(v==btn_next){
             // Si on est en dessous de 5 résultats
-            if(num_result<5) {
-                result.setText(results[num_result]);
+            if(num_result < game.activityToShowArray.size()) {
+                result.setText(game.activityToShowArray.get(num_result).getNameActivity());
                 num_result++;
             }
             // Sinon on dit qu'il n 'y a plus de résultat :(
