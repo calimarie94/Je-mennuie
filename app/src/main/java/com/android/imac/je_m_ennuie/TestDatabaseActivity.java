@@ -88,6 +88,13 @@ public class TestDatabaseActivity extends Activity{
             Answer testAnswer2 = myDbHelper.getImpactActivity(17, 0);
             System.out.println(testAnswer2.toString());
 
+            myDbHelper.fillDiscoveredActivitiesFromDB();
+            System.out.println("taille de discovered "+myDbHelper.discoveredActivies.size());
+            for (int i = 0; i<myDbHelper.discoveredActivies.size(); ++i){
+                Toast.makeText(this, " activité découverte numéro "+ myDbHelper.discoveredActivies.get(i).getIdActivity() +" énoncé : "+myDbHelper.discoveredActivies.get(i).toString(), Toast.LENGTH_LONG).show();
+            }
+
+
 
         }catch(SQLException sqle){
             System.out.println("Database not opened ! :( ");

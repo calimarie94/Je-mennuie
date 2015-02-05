@@ -27,6 +27,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Question> questions;
     public LinkedList<ActivityToDo> activities;
+    public ArrayList<ActivityToDo> discoveredActivies;
 
     // private static String ASSETS_DB_FOLDER = "db";
 
@@ -57,6 +58,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             DB_NAME = JemennuieActivity.DB_NAME;
             questions = new ArrayList<Question>();
             activities = new LinkedList<ActivityToDo>();
+            discoveredActivies = new ArrayList<ActivityToDo>();
             openDataBase();
          }
 
@@ -161,7 +163,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             cur.moveToFirst();
 
             while (cur.isAfterLast() == false) {
-                System.out.println("BOOOOWWAAA " + cur.getString(1));
                 questions.add(cursorToQuestion(cur));
                 cur.moveToNext();
             }
@@ -199,7 +200,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             activityToDo.setFavorite(favorite);
             activityToDo.setDiscovered(discover);
 
-            System.out.println("BOOOOWWAAA cursorToActivityToDo" + c.getString(1));
             System.out.println(activityToDo.toString());
 
             //On ferme le cursor
@@ -217,9 +217,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             cur.moveToFirst();
 
             while (cur.isAfterLast() == false) {
-                System.out.println("BOOOOWWAAA fillActivitiesToDoFromDB" + cur.getString(1));
                 activities.add(cursorToActivityToDo(cur));
-                System.out.println("BOOOOWWAAA fillActivitiesToDoFromDB" + cur.getString(1));
                 cur.moveToNext();
             }
 
@@ -228,35 +226,54 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
 
-        //Impact d'une activité selon une question
-        Answer getImpactActivity(int idActivity, int  idQuestion)
-        {
+    /****************************** Activités découvertes *************************************/
+    // récupérer les activités découvertes de la BDD et remplir l' ArrayList<ActivityToDo> discoveredActivities  avec
+    public void fillDiscoveredActivitiesFromDB(){
 
-            int zero = 0;
-            Cursor cur = this.myDataBase.rawQuery("SELECT impact FROM ActivityQuestion WHERE id_activity = "+idActivity+ " AND id_question ="+ idQuestion,null);
+        Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE discover = 1 ", null);
 
-            if (cur.getCount() == 0){
-                return Answer.NoMatter;
-            }
-            else {
+        cur.moveToFirst();
 
-                cur.moveToFirst();
-
-                int impact = cur.getInt(0);
-
-                switch (impact) {
-                    case 0:
-                        return Answer.No;
-                    case 1:
-                        return Answer.Yes;
-                    case 2:
-                        return Answer.NoMatter;
-                    default:
-                        return Answer.NoMatter;
-                }
-            }
-
+        while (cur.isAfterLast() == false) {
+            System.out.println("activité découverte"+ cur.toString());
+            discoveredActivies.add(cursorToActivityToDo(cur));
+            cur.moveToNext();
         }
+
+        // on ferme le cursor
+        cur.close();
+    }
+
+    /****************************** Impact *************************************/
+        //Impact d'une activité selon une question
+    Answer getImpactActivity(int idActivity, int  idQuestion)
+    {
+
+        int zero = 0;
+        Cursor cur = this.myDataBase.rawQuery("SELECT impact FROM ActivityQuestion WHERE id_activity = "+idActivity+ " AND id_question ="+ idQuestion,null);
+
+        if (cur.getCount() == 0){
+            return Answer.NoMatter;
+        }
+        else {
+
+            cur.moveToFirst();
+
+            int impact = cur.getInt(0);
+
+            switch (impact) {
+                case 0:
+                    return Answer.No;
+                case 1:
+                    return Answer.Yes;
+                case 2:
+                    return Answer.NoMatter;
+                default:
+                    return Answer.NoMatter;
+            }
+        }
+
+    }
 
     @Override
         public synchronized void close() {
