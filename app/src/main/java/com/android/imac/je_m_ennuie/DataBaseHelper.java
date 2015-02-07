@@ -315,7 +315,52 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     /****************************** Activités favorites *************************************/
+// récupérer les activités favorites de la BDD et remplir l' ArrayList<ActivityToDo> favoriteActivities  avec
+    public void fillFavoriteActivitiesFromDB(){
 
+        Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE favorite = 1 ", null);
+
+        cur.moveToFirst();
+        favoriteActivities.clear();
+
+        while (cur.isAfterLast() == false) {
+            System.out.println("activité favorite"+ cur.toString());
+            favoriteActivities.add(cursorToActivityToDo(cur));
+            cur.moveToNext();
+        }
+
+        // on ferme le cursor
+        cur.close();
+    }
+
+    // on change l'activité pour mettre favorite à 1 dans la bdd
+    public void addActivityToFavorite(ActivityToDo activityToDo){
+        favoriteActivities.add(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("favorite", 1); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
+
+    }
+
+    // on change l'activité pour mettre favorite à 0 dans la bdd
+    public void rmActivityToFavorite(ActivityToDo activityToDo){
+        favoriteActivities.remove(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("favorite", 0); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
+    }
 
 
 
