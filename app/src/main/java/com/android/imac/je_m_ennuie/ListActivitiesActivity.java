@@ -38,9 +38,9 @@ public class ListActivitiesActivity extends Activity {
         final Boolean favorite=false;
 
         final DataBaseHelper database = DataBaseHelper.getInstance(this);
-        System.out.println("Size of discover" + database.discoveredActivies.size());
+        System.out.println("Size of discover" + database.discoveredActivities.size());
 
-        for(ActivityToDo activityToDo : database.discoveredActivies)
+        for(ActivityToDo activityToDo : database.discoveredActivities)
         {
             values.add(activityToDo.getNameActivity());
         }

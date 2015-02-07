@@ -28,7 +28,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Question> questions;
     public LinkedList<ActivityToDo> activities;
-    public ArrayList<ActivityToDo> discoveredActivies;
+    public ArrayList<ActivityToDo> discoveredActivities;
 
     // private static String ASSETS_DB_FOLDER = "db";
 
@@ -59,10 +59,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         DB_NAME = JemennuieActivity.DB_NAME;
         questions = new ArrayList<Question>();
         activities = new LinkedList<ActivityToDo>();
-        discoveredActivies = new ArrayList<ActivityToDo>();
+        discoveredActivities = new ArrayList<ActivityToDo>();
         openDataBase();
     }
 
+    /**************
+     * TODO : décommenter if dbexist
+     */
     //This piece of code will create a database if it’s not yet created
     public void createDataBase() {
         //boolean dbExist = checkDataBase();
@@ -236,11 +239,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE discover = 1 ", null);
 
         cur.moveToFirst();
-        discoveredActivies.clear();
+        discoveredActivities.clear();
 
         while (cur.isAfterLast() == false) {
             System.out.println("activité découverte"+ cur.toString());
-            discoveredActivies.add(cursorToActivityToDo(cur));
+            discoveredActivities.add(cursorToActivityToDo(cur));
             cur.moveToNext();
         }
 
@@ -251,7 +254,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //Ajouter une activité dans la liste des activités découvertes et dans la base de données
     public void addDiscover(ActivityToDo activityToDo)
     {
-        discoveredActivies.add(activityToDo);
+        discoveredActivities.add(activityToDo);
         //Setter discover à 1 pour l'activité
         //myDataBase.rawQuery("UPDATE Activity SET discover = 1 WHERE _id = " + activityToDo.idActivity, null);
     }
@@ -289,7 +292,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /****************************** Activités découvertes *************************************/
     // on change l'activité pour mettre discover à 1 dans la bdd
-    public void addActivityToDiscover(int idActivity){
+    public void addActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.add(activityToDo);
         // create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put("discover", 1); // get title
@@ -298,12 +302,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
        this.myDataBase.update("Activity", //table
                 values, // column/value
                 "_id = ?", // selections
-                new String[] { String.valueOf(idActivity) }); //selection args
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
 
     }
 
     // on change l'activité pour mettre discover à 0 dans la bdd
-    public void rmActivityToDiscover(int idActivity){
+    public void rmActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.remove(activityToDo);
         // create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put("discover", 0); // get title
@@ -312,7 +317,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.myDataBase.update("Activity", //table
                 values, // column/value
                 "_id = ?", // selections
-                new String[] { String.valueOf(idActivity) }); //selection args
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
     }
 
 
