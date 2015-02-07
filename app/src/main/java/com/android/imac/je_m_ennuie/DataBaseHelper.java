@@ -253,6 +253,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cur.close();
     }
 
+    // on change l'activité pour mettre discover à 1 dans la bdd
+    public void addActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.add(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 1); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
+
+    }
+
+    // on change l'activité pour mettre discover à 0 dans la bdd
+    public void rmActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.remove(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 0); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
+    }
+
     /****************************** Impact *************************************/
     //Impact d'une activité selon une question
     Answer getImpactActivity(int idActivity, int  idQuestion)
@@ -285,35 +314,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    /****************************** Activités découvertes *************************************/
-    // on change l'activité pour mettre discover à 1 dans la bdd
-    public void addActivityToDiscover(ActivityToDo activityToDo){
-        discoveredActivities.add(activityToDo);
-        // create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put("discover", 1); // get title
+    /****************************** Activités favorites *************************************/
 
-        // updating row
-       this.myDataBase.update("Activity", //table
-                values, // column/value
-                "_id = ?", // selections
-                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
 
-    }
 
-    // on change l'activité pour mettre discover à 0 dans la bdd
-    public void rmActivityToDiscover(ActivityToDo activityToDo){
-        discoveredActivities.remove(activityToDo);
-        // create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put("discover", 0); // get title
-
-        // updating row
-        this.myDataBase.update("Activity", //table
-                values, // column/value
-                "_id = ?", // selections
-                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
-    }
 
 
     @Override
