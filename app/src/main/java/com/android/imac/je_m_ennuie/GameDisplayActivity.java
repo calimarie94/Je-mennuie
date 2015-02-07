@@ -114,7 +114,7 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
 
                 nbAleatoire = rand.nextInt(max - min + 1) + min;
                 button_no.setText(tab_no[nbAleatoire]);
-                
+
                 number_question.setText(game.nbQuestionAnswered+1 + "/" + Math.min((int)game.NB_QUESTIONS_PER_ROUND, game.nbQuestionAnswered + game.questionGameArray.size() ));
             }
         }
