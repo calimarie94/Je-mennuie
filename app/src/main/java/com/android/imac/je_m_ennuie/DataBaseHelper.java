@@ -29,6 +29,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public ArrayList<Question> questions;
     public LinkedList<ActivityToDo> activities;
     public ArrayList<ActivityToDo> discoveredActivities;
+    public ArrayList<ActivityToDo> favoriteActivities;
 
     // private static String ASSETS_DB_FOLDER = "db";
 
@@ -60,6 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         questions = new ArrayList<Question>();
         activities = new LinkedList<ActivityToDo>();
         discoveredActivities = new ArrayList<ActivityToDo>();
+        favoriteActivities = new ArrayList<ActivityToDo>();
         openDataBase();
     }
 
@@ -310,7 +312,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.myDataBase.update("Activity", //table
                 values, // column/value
                 "_id = ?", // selections
-                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
+                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
     }
 
 
