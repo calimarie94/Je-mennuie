@@ -45,6 +45,9 @@
         <activity
             android:name=".NoMoreResultActivity"
             android:label="@string/title_nomoreresult" />
+        <activity
+            android:name=".NoResultFoundActivity"
+            android:label="@string/title_noresultfound" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

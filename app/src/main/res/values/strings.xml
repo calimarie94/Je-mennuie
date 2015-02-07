@@ -37,6 +37,12 @@
     <string name="button_continue">Continuer les questions</string>
     <string name="button_myactivities">Voir la liste de mes activités</string>
 
+    <!-- AUCUN RESULTAT -->
+    <string name="title_noresultfound">Oh...désolé !</string>
+    <string name="text_noresultfound">Nous n\'avons trouvé aucune activité qui te correspond</string>
+    <string name="button_makeagain">Faire une nouvelle partie</string>
+    <string name="button_nofoundactivities">Voir la liste de mes activités</string>
+
     <!-- RESEAUX sociaux -->
     <string name="facebook_app_id">407723899384341</string>
 

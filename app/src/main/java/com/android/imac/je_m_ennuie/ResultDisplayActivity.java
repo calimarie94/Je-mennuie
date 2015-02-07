@@ -15,14 +15,6 @@ import java.util.LinkedList;
  * Created by Marie on 27/12/2014.
  */
 public class ResultDisplayActivity extends Activity implements View.OnClickListener {
-    // Liste des résultats (à calculer en fonction des réponses)
-    final String[] results = new String[]{
-            "Le texte de la jolie petite réponse 1 ",
-            "Le texte de la jolie petite réponse 2 ",
-            "Le texte de la jolie petite réponse 3 ",
-            "Le texte de la jolie petite réponse 4 ",
-            "Le texte de la jolie petite réponse 5 ",
-    };
 
     int num_result=0;
     TextView title_result;
@@ -54,7 +46,8 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
         }
         else
         {
-            Intent intent = new Intent(this, NoMoreResultActivity.class);
+            Intent intent = new Intent(this, NoResultFoundActivity.class);
+            ResultDisplayActivity.this.finish();
             startActivity(intent);
         }
         /* On charge la bonne police */
@@ -75,15 +68,19 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        // Detail activité
         if(v==btn_ok){
+            ResultDisplayActivity.this.finish();
             Intent intent = new Intent(this, DetailedActivityActivity.class);
             intent.putExtra("text_result", text_result);
             startActivity(intent);
         }
+        // Autre activité
         if(v==btn_next){
             // Si on est en dessous de 5 résultats
             if(num_result < game.activityToShowArray.size()) {
-                result.setText(game.activityToShowArray.get(num_result).getNameActivity());
+                text_result=game.activityToShowArray.get(num_result).getNameActivity();
+                result.setText(text_result);
                 num_result++;
             }
             // Sinon on dit qu'il n 'y a plus de résultat :(
