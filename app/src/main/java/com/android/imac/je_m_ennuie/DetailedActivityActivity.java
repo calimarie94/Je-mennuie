@@ -57,7 +57,8 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         title_activity.setTypeface(font);
         btn_favorite.setTypeface(font);
 
-        text_activity.setText(intent.getStringExtra("text_result"));
+        if (intent.getStringExtra("text_result")!=null)
+            text_activity.setText(intent.getStringExtra("text_result"));
 
         /* Changement de couleur au clic */
         btn_favorite.setBackgroundResource(R.drawable.selector);
@@ -152,5 +153,6 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         super.onDestroy();
         uiHelper.onDestroy();
     }
+
 
 }
