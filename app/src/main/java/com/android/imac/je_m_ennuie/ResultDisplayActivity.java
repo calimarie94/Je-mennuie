@@ -78,7 +78,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
             ResultDisplayActivity.this.finish();
             Intent intent = new Intent(this, DetailedActivityActivity.class);
             intent.putExtra("text_result", text_result);
-            database.addDiscover(activity_result);
+            database.addActivityToDiscover(activity_result);
             startActivity(intent);
         }
         // Autre activité

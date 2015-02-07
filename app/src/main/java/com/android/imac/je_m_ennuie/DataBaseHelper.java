@@ -251,13 +251,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cur.close();
     }
 
-    //Ajouter une activité dans la liste des activités découvertes et dans la base de données
-    public void addDiscover(ActivityToDo activityToDo)
-    {
-        discoveredActivities.add(activityToDo);
-        //Setter discover à 1 pour l'activité
-        //myDataBase.rawQuery("UPDATE Activity SET discover = 1 WHERE _id = " + activityToDo.idActivity, null);
-    }
     /****************************** Impact *************************************/
     //Impact d'une activité selon une question
     Answer getImpactActivity(int idActivity, int  idQuestion)
