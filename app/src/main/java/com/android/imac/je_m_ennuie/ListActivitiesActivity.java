@@ -39,10 +39,11 @@ public class ListActivitiesActivity extends Activity {
 
         final Boolean favorite=false;
 
-        final ArrayList<String> list = new ArrayList<String>();
+        /*final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
-        }
+        }*/
+
         final ListActivityAdapter adapter = new ListActivityAdapter(getApplicationContext(), values);
         listview.setAdapter(adapter);
 

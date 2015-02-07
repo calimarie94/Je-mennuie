@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -41,12 +42,10 @@ public class NoResultFoundActivity extends Activity {
 
         btn_makeagain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!game.questionGameArray.isEmpty() && !game.activityGameArray.isEmpty() )
-                {
-                    game.beginRound();
-                    Intent intent = new Intent(NoResultFoundActivity.this, GameDisplayActivity.class);
-                    startActivity(intent);
-                }
+                NoResultFoundActivity.this.finish();
+                Intent intent = new Intent(NoResultFoundActivity.this, GameDisplayActivity.class);
+                game.newGame();
+                startActivity(intent);
             }
         });
 
