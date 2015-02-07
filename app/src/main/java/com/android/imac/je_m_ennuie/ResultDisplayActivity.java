@@ -30,6 +30,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
     Button btn_ok;
     Button btn_next;
     Game game;
+    String text_result;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
         /* Update des bonnes données */
         if(!game.activityToShowArray.isEmpty())
         {
-            result.setText(game.activityToShowArray.get(num_result).getNameActivity());
+            text_result=game.activityToShowArray.get(num_result).getNameActivity();
+            result.setText(text_result);
             num_result++;
         }
         else
@@ -75,6 +77,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
     public void onClick(View v) {
         if(v==btn_ok){
             Intent intent = new Intent(this, DetailedActivityActivity.class);
+            intent.putExtra("text_result", text_result);
             startActivity(intent);
         }
         if(v==btn_next){

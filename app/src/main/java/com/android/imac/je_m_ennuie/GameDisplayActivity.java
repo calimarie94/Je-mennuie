@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
 /**
  * Created by Marie on 23/12/2014.
  */
@@ -26,13 +24,6 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
     Button button_yes;
     Button button_maybe;
     Button button_no;
-    String tab_yes[] = {"Oui, ça me dit", "Carrément !", "Pourquoi pas!","Oh ouiiii !", "Ouep ouep"};
-    String tab_maybe[] = {"Peu importe", "Je m'en fiche", "Je passe", "Moyen moyen", "Mmmmmh"};
-    String tab_no[] = {"Nooooon", "Tu rêves !", "No way !", "T'es sérieux ?", "Oh non, pas ça !"};
-    static int min=0;
-    static int max=4;
-    Random rand = new Random();
-    int nbAleatoire = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,16 +54,6 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
         button_yes.setBackgroundResource(R.drawable.selector);
         button_maybe.setBackgroundResource(R.drawable.selector);
         button_no.setBackgroundResource(R.drawable.selector);
-
-        /* Changement du texte des reponses */
-        nbAleatoire = rand.nextInt(max - min + 1) + min;
-        button_yes.setText(tab_yes[nbAleatoire]);
-
-        nbAleatoire = rand.nextInt(max - min + 1) + min;
-        button_maybe.setText(tab_maybe[nbAleatoire]);
-
-        nbAleatoire = rand.nextInt(max - min + 1) + min;
-        button_no.setText(tab_no[nbAleatoire]);
 
         /* Evenements au clic */
         button_yes.setOnClickListener(this);
@@ -105,17 +86,7 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
             else
             {
                 question.setText(game.getCurrentQuestionText());
-                /* Changement du texte des reponses */
-                nbAleatoire = rand.nextInt(max - min + 1) + min;
-                button_yes.setText(tab_yes[nbAleatoire]);
-
-                nbAleatoire = rand.nextInt(max - min + 1) + min;
-                button_maybe.setText(tab_maybe[nbAleatoire]);
-
-                nbAleatoire = rand.nextInt(max - min + 1) + min;
-                button_no.setText(tab_no[nbAleatoire]);
-
-                number_question.setText(game.nbQuestionAnswered + 1 + "/" + Math.min((int) game.NB_QUESTIONS_PER_ROUND, game.nbQuestionAnswered + game.questionGameArray.size()));
+                number_question.setText(game.nbQuestionAnswered+1 + "/" + Math.min((int)game.NB_QUESTIONS_PER_ROUND, game.nbQuestionAnswered + game.questionGameArray.size() ));
             }
         }
 

@@ -21,7 +21,7 @@
 
 
     <TextView
-        android:id="@+id/text_activity"
+        android:id="@+id/text_activity_detailed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_detailed_activity"

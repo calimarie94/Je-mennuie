@@ -32,6 +32,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
     Intent intent;
     boolean is_favorite;
     private UiLifecycleHelper uiHelper;
+    private char coucou;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
 
         /* Récupération des éléments de la vue */
         TextView title_activity = (TextView) findViewById(R.id.title_activity_detailed);
+        TextView text_activity = (TextView) findViewById(R.id.text_activity_detailed);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
         btn_twitter = (Button) findViewById(R.id.btn_twitter);
         btn_gmail = (Button) findViewById(R.id.btn_gmail);
@@ -54,6 +56,8 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title_activity.setTypeface(font);
         btn_favorite.setTypeface(font);
+
+        text_activity.setText(intent.getStringExtra("text_result"));
 
         /* Changement de couleur au clic */
         btn_favorite.setBackgroundResource(R.drawable.selector);

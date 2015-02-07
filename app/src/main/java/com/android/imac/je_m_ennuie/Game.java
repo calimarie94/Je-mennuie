@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class Game {
 
-    public static final int NB_QUESTIONS_PER_ROUND = 10;
+    public static final int NB_QUESTIONS_PER_ROUND = 5;
     public static final int NB_ROUND = 2;
     public static final int NB_ACTIVITIES_TO_SHOW = 5;
 
@@ -153,11 +153,6 @@ public class Game {
         else
         {
             System.out.println("Désolé, aucune activité à proposer");
-        }
-
-        if( roundNumber >= NB_ROUND )
-        {
-            System.out.println("All" + roundNumber + "Round ");
         }
     }
 

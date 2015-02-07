@@ -61,4 +61,4 @@
             android:layout_marginRight="10dip"
             android:layout_toLeftOf="@id/com_facebook_picker_divider"/>
 </RelativeLayout>
-<!-- From: file:/D:/vivie/IMAC%203/Android-projet/Je-m-ennuie-Marie/Je-mennuie/facebook/res/layout/com_facebook_picker_title_bar.xml -->
+<!-- From: file:/C:/Users/Marie/Documents/GitHub/Je-mennuie/facebook/res/layout/com_facebook_picker_title_bar.xml -->
