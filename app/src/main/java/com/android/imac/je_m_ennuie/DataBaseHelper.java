@@ -1,5 +1,6 @@
 package com.android.imac.je_m_ennuie;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -274,6 +275,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
+    /****************************** Activités découvertes *************************************/
+    // on change l'activité pour mettre discover à 1 dans la bdd
+    public void addActivityToDiscover(int idActivity){
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 1); // get title
+
+        // updating row
+       this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(idActivity) }); //selection args
+
+    }
+
+    // on change l'activité pour mettre discover à 0 dans la bdd
+    public void rmActivityToDiscover(int idActivity){
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 0); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(idActivity) }); //selection args
+    }
+
 
     @Override
     public synchronized void close() {
