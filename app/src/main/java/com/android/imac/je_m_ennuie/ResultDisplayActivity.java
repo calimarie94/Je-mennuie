@@ -23,11 +23,15 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
     Button btn_next;
     Game game;
     String text_result;
+    ActivityToDo activity_result;
+    DataBaseHelper database;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_display);
+
+        database = DataBaseHelper.getInstance(this);
 
         /* Récupération des éléments de la vue */
         title_result = (TextView) findViewById(R.id.title_result);
@@ -41,6 +45,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
         if(!game.activityToShowArray.isEmpty())
         {
             text_result=game.activityToShowArray.get(num_result).getNameActivity();
+            activity_result = game.activityToShowArray.get(num_result);
             result.setText(text_result);
             num_result++;
         }
@@ -73,6 +78,7 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
             ResultDisplayActivity.this.finish();
             Intent intent = new Intent(this, DetailedActivityActivity.class);
             intent.putExtra("text_result", text_result);
+            database.addDiscover(activity_result);
             startActivity(intent);
         }
         // Autre activité

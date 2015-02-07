@@ -64,6 +64,7 @@ public class JemennuieActivity extends ActionBarActivity {
         myDbHelper.openDataBase();
         myDbHelper.fillQuestionsFromDB();
         myDbHelper.fillActivitiesToDoFromDB();
+        myDbHelper.fillDiscoveredActivitiesFromDB();
 
         // Création du jeu
         final Game game = Game.getInstance(this);

@@ -31,18 +31,19 @@ public class ListActivitiesActivity extends Activity {
         title.setTypeface(font);
 
         final ListView listview = (ListView) findViewById(R.id.list_activity);
+        final ArrayList<String> values = new ArrayList<String>();
 
         // A remplacer par les vraies activités avec une boucle
-        String[] values = new String[]{"Activité 1", "Activité 2", "Activité 3",
-                "Activité 4", "Activité 5", "Activité 6", "Activité 7", "Activité 8",
-                "Activité 9", "Activité 10", "Activité 11", "Activité 12"};
 
         final Boolean favorite=false;
 
-        /*final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }*/
+        final DataBaseHelper database = DataBaseHelper.getInstance(this);
+        System.out.println("Size of discover" + database.discoveredActivies.size());
+
+        for(ActivityToDo activityToDo : database.discoveredActivies)
+        {
+            values.add(activityToDo.getNameActivity());
+        }
 
         final ListActivityAdapter adapter = new ListActivityAdapter(getApplicationContext(), values);
         listview.setAdapter(adapter);
