@@ -33,6 +33,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
     boolean is_favorite;
     private UiLifecycleHelper uiHelper;
     private char coucou;
+    TextView text_activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
 
         /* Récupération des éléments de la vue */
         TextView title_activity = (TextView) findViewById(R.id.title_activity_detailed);
-        TextView text_activity = (TextView) findViewById(R.id.text_activity_detailed);
+        text_activity = (TextView) findViewById(R.id.text_activity_detailed);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
         btn_twitter = (Button) findViewById(R.id.btn_twitter);
         btn_gmail = (Button) findViewById(R.id.btn_gmail);
@@ -85,7 +86,8 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
                     FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
                 // Publish the post using the Share Dialog
                 FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
-                        .setLink("https://developers.facebook.com/android")
+                        .setDescription("L'application je m'ennuie m'a proposé cette activité : "+text_activity.getText())
+                        .setLink("https://www.facebook.com/appli.jemennuie")
                         .build();
                 uiHelper.trackPendingDialogCall(shareDialog.present());
 
