@@ -1,5 +1,6 @@
 package com.android.imac.je_m_ennuie;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -27,7 +28,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Question> questions;
     public LinkedList<ActivityToDo> activities;
-    public ArrayList<ActivityToDo> discoveredActivies;
+    public ArrayList<ActivityToDo> discoveredActivities;
+    public ArrayList<ActivityToDo> favoriteActivities;
 
     // private static String ASSETS_DB_FOLDER = "db";
 
@@ -58,10 +60,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         DB_NAME = JemennuieActivity.DB_NAME;
         questions = new ArrayList<Question>();
         activities = new LinkedList<ActivityToDo>();
-        discoveredActivies = new ArrayList<ActivityToDo>();
+        discoveredActivities = new ArrayList<ActivityToDo>();
+        favoriteActivities = new ArrayList<ActivityToDo>();
         openDataBase();
     }
 
+    /**************
+     * TODO : décommenter if dbexist
+     */
     //This piece of code will create a database if it’s not yet created
     public void createDataBase() {
         //boolean dbExist = checkDataBase();
@@ -235,11 +241,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE discover = 1 ", null);
 
         cur.moveToFirst();
-        discoveredActivies.clear();
+        discoveredActivities.clear();
 
         while (cur.isAfterLast() == false) {
             System.out.println("activité découverte"+ cur.toString());
-            discoveredActivies.add(cursorToActivityToDo(cur));
+            discoveredActivities.add(cursorToActivityToDo(cur));
             cur.moveToNext();
         }
 
@@ -247,13 +253,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cur.close();
     }
 
-    //Ajouter une activité dans la liste des activités découvertes et dans la base de données
-    public void addDiscover(ActivityToDo activityToDo)
-    {
-        discoveredActivies.add(activityToDo);
-        //Setter discover à 1 pour l'activité
-        //myDataBase.rawQuery("UPDATE Activity SET discover = 1 WHERE _id = " + activityToDo.idActivity, null);
+    // on change l'activité pour mettre discover à 1 dans la bdd
+    public void addActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.add(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 1); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
+
     }
+
+    // on change l'activité pour mettre discover à 0 dans la bdd
+    public void rmActivityToDiscover(ActivityToDo activityToDo){
+        discoveredActivities.remove(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("discover", 0); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
+    }
+
     /****************************** Impact *************************************/
     //Impact d'une activité selon une question
     Answer getImpactActivity(int idActivity, int  idQuestion)
@@ -284,6 +312,58 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
+    /****************************** Activités favorites *************************************/
+// récupérer les activités favorites de la BDD et remplir l' ArrayList<ActivityToDo> favoriteActivities  avec
+    public void fillFavoriteActivitiesFromDB(){
+
+        Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE favorite = 1 ", null);
+
+        cur.moveToFirst();
+        favoriteActivities.clear();
+
+        while (cur.isAfterLast() == false) {
+            System.out.println("activité favorite"+ cur.toString());
+            favoriteActivities.add(cursorToActivityToDo(cur));
+            cur.moveToNext();
+        }
+
+        // on ferme le cursor
+        cur.close();
+    }
+
+    // on change l'activité pour mettre favorite à 1 dans la bdd
+    public void addActivityToFavorite(ActivityToDo activityToDo){
+        favoriteActivities.add(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("favorite", 1); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
+
+    }
+
+    // on change l'activité pour mettre favorite à 0 dans la bdd
+    public void rmActivityToFavorite(ActivityToDo activityToDo){
+        favoriteActivities.remove(activityToDo);
+        // create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("favorite", 0); // get title
+
+        // updating row
+        this.myDataBase.update("Activity", //table
+                values, // column/value
+                "_id = ?", // selections
+                new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
+    }
+
+
+
 
     @Override
     public synchronized void close() {
