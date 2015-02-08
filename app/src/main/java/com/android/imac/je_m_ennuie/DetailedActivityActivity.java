@@ -25,6 +25,7 @@ import com.facebook.widget.WebDialog;
  */
 public class DetailedActivityActivity extends Activity implements View.OnClickListener {
     final String EXTRA_FAVORITE = "is_favorite";
+    final String ID_ACTIVITY = "id_activity";
     Button btn_facebook;
     Button btn_twitter;
     Button btn_gmail;
@@ -33,6 +34,8 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
     boolean is_favorite;
     private UiLifecycleHelper uiHelper;
     private char coucou;
+    DataBaseHelper database;
+    int id_current_activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,13 +54,16 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         btn_favorite = (Button) findViewById(R.id.btn_favorite);
         intent = getIntent();
         is_favorite=intent.getBooleanExtra(EXTRA_FAVORITE,false);
+        id_current_activity = intent.getIntExtra(ID_ACTIVITY, -1);
+        database = DataBaseHelper.getInstance(this);
 
         /* On charge la bonne police */
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title_activity.setTypeface(font);
         btn_favorite.setTypeface(font);
 
-        text_activity.setText(intent.getStringExtra("text_result"));
+        if (intent.getStringExtra("text_result")!=null)
+            text_activity.setText(intent.getStringExtra("text_result"));
 
         /* Changement de couleur au clic */
         btn_favorite.setBackgroundResource(R.drawable.selector);
@@ -65,7 +71,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         /* Changement du bouton favori en fonction de l'activité */
         if (is_favorite){
             btn_favorite.setText("Retirer des favoris");
-        // Sinon
+            // Sinon
         }else{
             btn_favorite.setText("Ajouter aux favoris");
         }
@@ -75,6 +81,8 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         btn_twitter.setOnClickListener(this);
         btn_gmail.setOnClickListener(this);
         btn_favorite.setOnClickListener(this);
+
+        System.out.println("id : " + id_current_activity + " favorite " + is_favorite);
     }
 
     @Override
@@ -99,14 +107,16 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         if(v==btn_gmail)
             Toast.makeText(getApplicationContext(), "Partage Google", Toast.LENGTH_SHORT).show();
 
-        if(v==btn_favorite)
+        if(v==btn_favorite && id_current_activity != -1)
             if(is_favorite){
                 btn_favorite.setText("Ajouter aux favoris");
                 is_favorite=false;
+                database.rmActivityToFavorite(database.activities.get(id_current_activity));
                 //fonction pour retirer des favoris
             }else{
                 btn_favorite.setText("Retirer des favoris");
                 is_favorite=true;
+                database.addActivityToFavorite(database.activities.get(id_current_activity));
                 //fonction pour ajouter des favoris
             }
 
@@ -152,5 +162,6 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         super.onDestroy();
         uiHelper.onDestroy();
     }
+
 
 }
