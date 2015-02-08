@@ -86,13 +86,14 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
                     FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
                 // Publish the post using the Share Dialog
                 FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                        .setName("Application je m'ennuie")
                         .setDescription("L'application je m'ennuie m'a proposé cette activité : "+text_activity.getText())
                         .setLink("https://www.facebook.com/appli.jemennuie")
                         .build();
                 uiHelper.trackPendingDialogCall(shareDialog.present());
 
             } else {
-                Toast.makeText(getApplicationContext(),"Vous n'avez pas facebook d'installé",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Application Facebook non installée",Toast.LENGTH_LONG).show();
             }
         }
 
