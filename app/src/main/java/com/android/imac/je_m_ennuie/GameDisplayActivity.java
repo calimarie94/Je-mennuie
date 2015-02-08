@@ -88,12 +88,12 @@ public class GameDisplayActivity extends Activity implements View.OnClickListene
         final Game game = Game.getInstance(this);
 
         if(v==button_yes || v==button_maybe || v==button_no){
-                if (v==button_yes)
-                    game.answerQuestion(Answer.Yes);
-                else if (v==button_maybe)
-                    game.answerQuestion(Answer.NoMatter);
-                else if (v==button_no)
-                    game.answerQuestion(Answer.No);
+            if (v==button_yes)
+                game.answerQuestion(Answer.Yes);
+            else if (v==button_maybe)
+                game.answerQuestion(Answer.NoMatter);
+            else if (v==button_no)
+                game.answerQuestion(Answer.No);
 
 
             if(game.round_finished) {

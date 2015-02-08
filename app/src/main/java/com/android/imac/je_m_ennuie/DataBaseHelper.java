@@ -335,7 +335,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // on change l'activité pour mettre favorite à 1 dans la bdd
     public void addActivityToFavorite(ActivityToDo activityToDo){
-        favoriteActivities.add(activityToDo);
+        //favoriteActivities.add(activityToDo);
         // create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put("favorite", 1); // get title
@@ -346,11 +346,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "_id = ?", // selections
                 new String[] { String.valueOf(activityToDo.getIdActivity()) }); //selection args
 
+        activityToDo.setFavorite(true);
     }
 
     // on change l'activité pour mettre favorite à 0 dans la bdd
     public void rmActivityToFavorite(ActivityToDo activityToDo){
-        favoriteActivities.remove(activityToDo);
+        //favoriteActivities.remove(activityToDo);
         // create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
         values.put("favorite", 0); // get title
@@ -360,6 +361,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 values, // column/value
                 "_id = ?", // selections
                 new String[]{String.valueOf(activityToDo.getIdActivity())}); //selection args
+        activityToDo.setFavorite(false);
     }
 
 

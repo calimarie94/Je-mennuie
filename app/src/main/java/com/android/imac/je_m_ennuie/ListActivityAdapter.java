@@ -16,11 +16,13 @@ import java.util.ArrayList;
 public class ListActivityAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final ArrayList<String> values;
+    public final ArrayList<Integer> id_activites;
 
-    public ListActivityAdapter(Context context, ArrayList<String> values) {
+    public ListActivityAdapter(Context context, ArrayList<String> values, ArrayList<Integer> id_activites) {
         super(context, R.layout.row_layout, values);
         this.context = context;
         this.values = values;
+        this.id_activites = id_activites;
     }
 
     @Override
@@ -34,9 +36,7 @@ public class ListActivityAdapter extends ArrayAdapter<String> {
 
         // Mettre une etoile pleine si il est favori, etoile vide sinon
 
-        /*String s = values[position];
-
-        if (s.isFavorite()) {
+        /*if (activite favorite) {
             imageView.setImageResource(R.drawable.full_star);
         } else {
             imageView.setImageResource(R.drawable.empty_star);
@@ -45,4 +45,3 @@ public class ListActivityAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 }
-

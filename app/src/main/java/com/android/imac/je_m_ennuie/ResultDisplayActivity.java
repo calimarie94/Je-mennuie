@@ -16,6 +16,8 @@ import java.util.LinkedList;
  */
 public class ResultDisplayActivity extends Activity implements View.OnClickListener {
 
+    final String ID_ACTIVITY = "id_activity";
+    final String EXTRA_FAVORITE = "is_favorite";
     int num_result=0;
     TextView title_result;
     TextView result;
@@ -78,6 +80,9 @@ public class ResultDisplayActivity extends Activity implements View.OnClickListe
             ResultDisplayActivity.this.finish();
             Intent intent = new Intent(this, DetailedActivityActivity.class);
             intent.putExtra("text_result", text_result);
+            intent.putExtra(EXTRA_FAVORITE, activity_result.getFavorite());
+            intent.putExtra(ID_ACTIVITY, activity_result.idActivity);
+            activity_result.setDiscovered(true);
             database.addActivityToDiscover(activity_result);
             startActivity(intent);
         }

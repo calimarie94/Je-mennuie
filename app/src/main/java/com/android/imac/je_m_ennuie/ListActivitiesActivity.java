@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 public class ListActivitiesActivity extends Activity {
 
     final String EXTRA_FAVORITE = "is_favorite";
+    final String ID_ACTIVITY = "id_activity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +35,21 @@ public class ListActivitiesActivity extends Activity {
 
         final ListView listview = (ListView) findViewById(R.id.list_activity);
         final ArrayList<String> values = new ArrayList<String>();
-
-        // A remplacer par les vraies activités avec une boucle
-
-        final Boolean favorite=false;
+        final ArrayList<Integer> ids = new ArrayList<Integer>();
 
         final DataBaseHelper database = DataBaseHelper.getInstance(this);
-        System.out.println("Size of discover" + database.discoveredActivities.size());
 
-        for(ActivityToDo activityToDo : database.discoveredActivities)
+        for(ActivityToDo activityToDo : database.activities)
         {
-            values.add(activityToDo.getNameActivity());
+            if(activityToDo.getDiscovered())
+            {
+                values.add(activityToDo.getNameActivity());
+                ids.add(activityToDo.idActivity);
+            }
+
         }
 
-        final ListActivityAdapter adapter = new ListActivityAdapter(getApplicationContext(), values);
+        final ListActivityAdapter adapter = new ListActivityAdapter(getApplicationContext(), values, ids);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,7 +58,10 @@ public class ListActivitiesActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 Intent intent = new Intent(ListActivitiesActivity.this, DetailedActivityActivity.class);
-                intent.putExtra(EXTRA_FAVORITE,favorite);
+                ListActivityAdapter adapter = (ListActivityAdapter)parent.getAdapter();
+                int id_current_activity = adapter.id_activites.get((int)position);
+                intent.putExtra(EXTRA_FAVORITE,database.activities.get(id_current_activity).getFavorite());
+                intent.putExtra(ID_ACTIVITY,database.activities.get(id_current_activity).idActivity);
                 startActivity(intent);
             }
 

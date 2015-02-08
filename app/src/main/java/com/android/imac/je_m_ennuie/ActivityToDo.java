@@ -17,15 +17,6 @@ public class ActivityToDo {
         isDiscovered = false;
     }
 
-    /*
-    ActivityToDo(String name)
-    {
-        nameActivity = name;
-        isFavorite = false;
-        isDiscovered = false;
-    }
-    */
-
     Answer getImpact(DataBase dataBase, Question question)
     {
         return dataBase.getImpactActivity(idActivity, question);
