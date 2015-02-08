@@ -162,6 +162,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         cur.moveToFirst();
 
+        questions.clear();
         while (cur.isAfterLast() == false) {
             questions.add(cursorToQuestion(cur));
             cur.moveToNext();
@@ -216,6 +217,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         cur.moveToFirst();
 
+        activities.clear();
         while (cur.isAfterLast() == false) {
             activities.add(cursorToActivityToDo(cur));
             cur.moveToNext();
@@ -233,6 +235,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cur = this.myDataBase.rawQuery("SELECT * FROM Activity WHERE discover = 1 ", null);
 
         cur.moveToFirst();
+        discoveredActivies.clear();
 
         while (cur.isAfterLast() == false) {
             System.out.println("activité découverte"+ cur.toString());
@@ -244,6 +247,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cur.close();
     }
 
+    //Ajouter une activité dans la liste des activités découvertes et dans la base de données
+    public void addDiscover(ActivityToDo activityToDo)
+    {
+        discoveredActivies.add(activityToDo);
+        //Setter discover à 1 pour l'activité
+        //myDataBase.rawQuery("UPDATE Activity SET discover = 1 WHERE _id = " + activityToDo.idActivity, null);
+    }
     /****************************** Impact *************************************/
     //Impact d'une activité selon une question
     Answer getImpactActivity(int idActivity, int  idQuestion)

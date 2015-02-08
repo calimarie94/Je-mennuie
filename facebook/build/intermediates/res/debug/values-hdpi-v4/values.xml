@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- From: file:/D:/vivie/IMAC%203/Android-projet/Je-m-ennuie-Marie/Je-mennuie/facebook/res/values-hdpi/dimens.xml -->
-    <eat-comment />
-
+    <!-- From: file:/D:/Logiciels/Android/Projets/Jemennuie/facebook/res/values-hdpi/dimens.xml -->
+    <eat-comment/>
     <dimen name="com_facebook_picker_divider_width">1px</dimen>
-
 </resources>
