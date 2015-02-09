@@ -54,17 +54,18 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         btn_gmail = (Button) findViewById(R.id.btn_gmail);
         btn_favorite = (Button) findViewById(R.id.btn_favorite);
         intent = getIntent();
-        is_favorite=intent.getBooleanExtra(EXTRA_FAVORITE,false);
         id_current_activity = intent.getIntExtra(ID_ACTIVITY, -1);
         database = DataBaseHelper.getInstance(this);
 
+        if(id_current_activity != -1)
+        {
+            is_favorite=database.activities.get(id_current_activity).getFavorite();
+            text_activity.setText(database.activities.get(id_current_activity).getNameActivity());
+        }
         /* On charge la bonne police */
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title_activity.setTypeface(font);
         btn_favorite.setTypeface(font);
-
-        if (intent.getStringExtra("text_result")!=null)
-            text_activity.setText(intent.getStringExtra("text_result"));
 
         /* Changement de couleur au clic */
         btn_favorite.setBackgroundResource(R.drawable.selector);
