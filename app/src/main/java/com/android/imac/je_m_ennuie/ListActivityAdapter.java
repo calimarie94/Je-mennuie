@@ -35,13 +35,16 @@ public class ListActivityAdapter extends ArrayAdapter<String> {
         textView.setText(values.get(position));
 
         // Mettre une etoile pleine si il est favori, etoile vide sinon
+        DataBaseHelper database = DataBaseHelper.getInstance(context);
+        boolean isfavorite = database.activities.get(id_activites.get(position)).getFavorite();
 
-        /*if (activite favorite) {
+        if (isfavorite) {
             imageView.setImageResource(R.drawable.full_star);
         } else {
             imageView.setImageResource(R.drawable.empty_star);
-        }*/
+        }
 
         return rowView;
     }
+
 }

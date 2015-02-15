@@ -22,6 +22,7 @@ public class ListActivitiesActivity extends Activity {
 
     final String EXTRA_FAVORITE = "is_favorite";
     final String ID_ACTIVITY = "id_activity";
+    ListActivityAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class ListActivitiesActivity extends Activity {
 
          /* Loading the fonts */
         TextView title = (TextView) findViewById(R.id.title_activity);
+        TextView numberactivities = (TextView) findViewById(R.id.number_activity);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title.setTypeface(font);
 
@@ -46,10 +48,11 @@ public class ListActivitiesActivity extends Activity {
                 values.add(activityToDo.getNameActivity());
                 ids.add(activityToDo.idActivity);
             }
-
         }
 
-        final ListActivityAdapter adapter = new ListActivityAdapter(getApplicationContext(), values, ids);
+        numberactivities.setText(values.size() + " activités sur " + database.activities.size());
+
+        adapter = new ListActivityAdapter(getApplicationContext(), values, ids);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,6 +69,12 @@ public class ListActivitiesActivity extends Activity {
             }
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
 

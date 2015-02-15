@@ -75,14 +75,14 @@ public class TestDatabaseActivity extends Activity{
 
             // test ArrayList Question
 
-            myDbHelper.fillQuestionsFromDB();
+            //myDbHelper.fillQuestionsFromDB();
             System.out.println("taille de questions "+myDbHelper.questions.size());
             /*for (int i = 0; i<myDbHelper.questions.size(); ++i){
                 Toast.makeText(this, " Question numéro "+ myDbHelper.questions.get(i).getId() +" énoncé : "+myDbHelper.questions.get(i).toString(), Toast.LENGTH_LONG).show();
             }*/
 
             // test Impact
-            System.out.println("pouet pouet ");
+           /* System.out.println("pouet pouet ");
             Answer testAnswer = myDbHelper.getImpactActivity(25,1);
             System.out.println(testAnswer.toString());
             Answer testAnswer2 = myDbHelper.getImpactActivity(17, 0);
@@ -93,21 +93,21 @@ public class TestDatabaseActivity extends Activity{
             myDbHelper.addActivityToDiscover(myDbHelper.activities.get(2));
             myDbHelper.addActivityToDiscover(myDbHelper.activities.get(3));
 
-            System.out.println("taille de discovered "+myDbHelper.discoveredActivities.size());
+            System.out.println("taille de discovered "+myDbHelper.discoveredActivities.size());*/
             /*for (int i = 0; i<myDbHelper.discoveredActivities.size(); ++i){
                 Toast.makeText(this, " activité découverte numéro "+ myDbHelper.discoveredActivities.get(i).getIdActivity() +" énoncé : "+myDbHelper.discoveredActivities.get(i).toString(), Toast.LENGTH_LONG).show();
             }*/
 
-            myDbHelper.rmActivityToDiscover(myDbHelper.activities.get(3));
+           /* myDbHelper.rmActivityToDiscover(myDbHelper.activities.get(3));
 
-            System.out.println("taille de discovered "+myDbHelper.discoveredActivities.size());
+            System.out.println("taille de discovered "+myDbHelper.discoveredActivities.size());*/
             /*for (int i = 0; i<myDbHelper.discoveredActivities.size(); ++i){
                 Toast.makeText(this, " activité découverte 2 numéro "+ myDbHelper.discoveredActivities.get(i).getIdActivity() +" énoncé : "+myDbHelper.discoveredActivities.get(i).toString(), Toast.LENGTH_LONG).show();
             }*/
 
 
 
-            myDbHelper.fillFavoriteActivitiesFromDB();
+            /*myDbHelper.fillFavoriteActivitiesFromDB();
 
             myDbHelper.addActivityToFavorite(myDbHelper.activities.get(7));
             myDbHelper.addActivityToFavorite(myDbHelper.activities.get(8));
@@ -125,7 +125,7 @@ public class TestDatabaseActivity extends Activity{
                 Toast.makeText(this, " activité favorite 2 numéro "+ myDbHelper.favoriteActivities.get(i).getIdActivity() +" énoncé : "+myDbHelper.favoriteActivities.get(i).toString(), Toast.LENGTH_LONG).show();
             }
 
-
+        */
         }catch(SQLException sqle){
             System.out.println("Database not opened ! :( ");
             throw sqle;
