@@ -33,9 +33,9 @@
     <!-- PLUS DE RESULTATS -->
     <string name="title_nomoreresult">Désolé !</string>
     <string name="text_nomoreresult">Tu as vu mes 5 propositions d\'activités</string>
-    <string name="button_back">Réafficher les propositions</string>
-    <string name="button_continue">Continuer les questions</string>
-    <string name="button_myactivities">Voir la liste de mes activités</string>
+    <string name="button_back">Réafficher</string>
+    <string name="button_continue">Continuer</string>
+    <string name="button_myactivities">Liste de mes activités</string>
 
     <!-- AUCUN RESULTAT -->
     <string name="title_noresultfound">Oh...désolé !</string>
