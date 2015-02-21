@@ -18,7 +18,9 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.WebDialog;
 
-
+import io.fabric.sdk.android.Fabric;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.Twitter;
 
 /**
  * Created by Marie on 26/12/2014.
@@ -37,6 +39,10 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
     TextView text_activity;
     DataBaseHelper database;
     int id_current_activity;
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "desqeJ64KSm4r1XeVJDVQ9VqR";
+    private static final String TWITTER_SECRET = "LHNAt2siLAQwr9xbLDz8kEBSjnF3R9sd1eHwWDrkzkDTgaY0IE";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,9 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         btn_favorite.setOnClickListener(this);
 
         System.out.println("id : " + id_current_activity + " favorite " + is_favorite);
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
     }
 
     @Override
