@@ -50,8 +50,6 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         TextView title_activity = (TextView) findViewById(R.id.title_activity_detailed);
         text_activity = (TextView) findViewById(R.id.text_activity_detailed);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
-        btn_twitter = (Button) findViewById(R.id.btn_twitter);
-        btn_gmail = (Button) findViewById(R.id.btn_gmail);
         btn_favorite = (Button) findViewById(R.id.btn_favorite);
         intent = getIntent();
         id_current_activity = intent.getIntExtra(ID_ACTIVITY, -1);
@@ -66,6 +64,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         title_activity.setTypeface(font);
         btn_favorite.setTypeface(font);
+        btn_facebook.setTypeface(font);
 
         /* Changement de couleur au clic */
         btn_favorite.setBackgroundResource(R.drawable.selector);
@@ -80,8 +79,6 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
 
         /* Evenements au clic */
         btn_facebook.setOnClickListener(this);
-        btn_twitter.setOnClickListener(this);
-        btn_gmail.setOnClickListener(this);
         btn_favorite.setOnClickListener(this);
 
         System.out.println("id : " + id_current_activity + " favorite " + is_favorite);
@@ -96,6 +93,7 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
                 FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
                         .setName("Application je m'ennuie")
                         .setDescription("L'application je m'ennuie m'a proposé cette activité : "+text_activity.getText())
+                        .setPicture("https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/10959876_924647554226447_8586101149710689244_n.png?oh=570848a9e7e1cae7994d69fb23491a36&oe=55525815&__gda__=1434195747_18d783743b872312d62524eeb68366e5")
                         .setLink("https://www.facebook.com/appli.jemennuie")
                         .build();
                 uiHelper.trackPendingDialogCall(shareDialog.present());
@@ -104,11 +102,6 @@ public class DetailedActivityActivity extends Activity implements View.OnClickLi
             }
         }
 
-        if(v==btn_twitter)
-            Toast.makeText(getApplicationContext(), "Partage Twitter", Toast.LENGTH_SHORT).show();
-
-        if(v==btn_gmail)
-            Toast.makeText(getApplicationContext(), "Partage Google", Toast.LENGTH_SHORT).show();
 
         if(v==btn_favorite && id_current_activity != -1)
             if(is_favorite){

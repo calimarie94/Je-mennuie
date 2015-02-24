@@ -42,58 +42,29 @@
         android:gravity="center_horizontal"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/big_size"
-            android:orientation="horizontal"
-            >
-
-            <Button
-                android:id="@+id/btn_facebook"
-                android:text="f"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/facebook"
-                android:layout_margin="@dimen/thin_margin"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/big_text"
-                android:layout_weight="1"
-                />
-
-            <Button
-                android:id="@+id/btn_twitter"
-                android:text="t"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/twitter"
-                android:layout_margin="@dimen/thin_margin"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/big_text"
-                android:layout_weight="1"
-                />
-
-            <Button
-                android:id="@+id/btn_gmail"
-                android:text="g"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/google"
-                android:layout_margin="@dimen/thin_margin"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/big_text"
-                android:layout_weight="1"
-                />
-
-    </LinearLayout>
         <Button
             android:id="@+id/btn_favorite"
             android:text="@string/button_detailed_activity"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/middle_size"
             android:background="@color/button_normal"
-            android:layout_margin="@dimen/thin_margin"
             android:textColor="@color/text_color"
             android:textSize="@dimen/default_text"
+            />
+
+        <Button
+            android:id="@+id/btn_facebook"
+            android:text="Partager sur Facebook"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/middle_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@color/facebook"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/default_text"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/logo_fbook"
+            android:paddingLeft="15dp"
+            android:paddingRight="20dp"
             />
     </LinearLayout>
 
