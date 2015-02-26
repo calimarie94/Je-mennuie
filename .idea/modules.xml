@@ -4,10 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FriendPickerSample/FriendPickerSample.iml" filepath="$PROJECT_DIR$/FriendPickerSample/FriendPickerSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/HelloFacebookSample/HelloFacebookSample.iml" filepath="$PROJECT_DIR$/HelloFacebookSample/HelloFacebookSample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Je-m-ennuie.iml" filepath="$PROJECT_DIR$/Je-m-ennuie.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Je-m-ennuie-3c7f8e78e3270615f2a6c20fed72dfcedd6d55cf.iml" filepath="$PROJECT_DIR$/Je-m-ennuie-3c7f8e78e3270615f2a6c20fed72dfcedd6d55cf.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Je-mennuie.iml" filepath="$PROJECT_DIR$/Je-mennuie.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OLD-Je-mennuie.iml" filepath="$PROJECT_DIR$/OLD-Je-mennuie.iml" />
       <module fileurl="file://$PROJECT_DIR$/PlacePickerSample/PlacePickerSample.iml" filepath="$PROJECT_DIR$/PlacePickerSample/PlacePickerSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/RPSSample/RPSSample.iml" filepath="$PROJECT_DIR$/RPSSample/RPSSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/Scrumptious/Scrumptious.iml" filepath="$PROJECT_DIR$/Scrumptious/Scrumptious.iml" />
